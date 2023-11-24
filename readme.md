@@ -9,7 +9,6 @@
 - Schema & TypeDefs
 - Query & Mutation
 - global contextValue
-- Demo Authentication
 
 ## Demo
 

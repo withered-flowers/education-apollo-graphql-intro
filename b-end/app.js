@@ -269,8 +269,12 @@ const todoResolvers = {
     },
 
     // Implementation of "contract" function for resolver "todoDelete"
-    todoDelete: (_, args) => {
+    // Since we will try to use context, we will need to use contextValue as third argument
+    todoDelete: (_, args, contextValue) => {
       const { id } = args;
+
+      // Inside here, we can call contextValue.dummyFunction
+      contextValue.dummyFunction();
 
       // We will filter todos and remove the todo with id
       todos = todos.filter((todo) => todo.id !== Number(id));
@@ -346,6 +350,29 @@ const server = new ApolloServer({
 (async () => {
   const { url } = await startStandaloneServer(server, {
     listen: 4000,
+    // context in Apollo GraphQL always a(n) async function
+    context: async ({ req, res }) => {
+      // We can make the global logic inside here (middleware)
+      console.log("this console will be triggered on every request");
+
+      // Always return an object
+      return {
+        // We can make the global function definition inside here
+        dummyFunction: () => {
+          console.log("We can read headers here", req.headers);
+
+          // Let's make it error
+          throw new GraphQLError("This is an error", {
+            // This is the extension for the error (to show in the response)
+            extensions: {
+              // https://www.apollographql.com/docs/apollo-server/data/errors#built-in-error-codes
+              // https://www.apollographql.com/docs/apollo-server/data/errors#custom-errors
+              code: "INTERNAL_SERVER_ERROR",
+            },
+          });
+        },
+      };
+    },
   });
 
   console.log(`🚀 Server ready at ${url}`);
