@@ -24,7 +24,7 @@ const users = [
 ];
 
 // ?? Schema / Type Definition / "Model" User
-export const userTypeDefs = `#graphql
+const userTypeDefs = `#graphql
   # Write the schema for User here
   type User {
     id: ID!
@@ -48,7 +48,7 @@ export const userTypeDefs = `#graphql
   # And we will use type "Mutation" for HTTP POST, PUT, DELETE request
 `;
 
-export const userResolvers = {
+const userResolvers = {
 	Query: {
 		userByEmail: (_, args) => {
 			const { email } = args;
@@ -91,3 +91,5 @@ export const userResolvers = {
 		},
 	},
 };
+
+export { userTypeDefs, userResolvers };
