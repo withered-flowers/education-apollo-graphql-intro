@@ -1,6 +1,4 @@
 // TODO: Let's write something here
-const { ApolloServer } = require("@apollo/server");
-const { startStandaloneServer } = require("@apollo/server/standalone");
 
 // ?? Initial data users
 const users = [

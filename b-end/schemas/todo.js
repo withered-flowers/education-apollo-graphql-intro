@@ -93,7 +93,7 @@ let todos = [
 ];
 
 // ?? Schema / Type Definition / "Model" Todo
-const todoTypeDefs = `#graphql
+export const todoTypeDefs = `#graphql
   # Write the schema for Todo here
   type Todo {
     id: ID!
@@ -132,7 +132,7 @@ const todoTypeDefs = `#graphql
   }
 `;
 
-const todoResolvers = {
+export const todoResolvers = {
 	Query: {
 		// Implementation of "contract" function for resolver "todoList"
 		todoList: () => {
@@ -188,9 +188,4 @@ const todoResolvers = {
 			};
 		},
 	},
-};
-
-module.exports = {
-	todoTypeDefs,
-	todoResolvers,
 };

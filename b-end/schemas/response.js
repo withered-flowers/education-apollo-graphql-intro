@@ -1,4 +1,4 @@
-const responseTypeDefs = `#graphql
+export const responseTypeDefs = `#graphql
   # Write the schema for Response here
   interface Response {
     # status will be flagged as required
@@ -50,7 +50,3 @@ const responseTypeDefs = `#graphql
   # For this type definition, we will not make any resolver
   # Because this type definition is only used for response
 `;
-
-module.exports = {
-	responseTypeDefs,
-};
